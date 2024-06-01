@@ -1,0 +1,19 @@
+.home-wrapper {
+    width: 70%;
+    margin: 0 auto;
+
+    .show-filter-input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        width: 25%;
+        margin: 5px 0 5px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home-wrapper {
+        width: 80%;
+    }
+}
