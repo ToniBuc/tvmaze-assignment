@@ -1,0 +1,51 @@
+<div *ngIf="show && !errorThrown" class="show-details-wrapper">
+    <div class="show-trailer-image-wrapper">
+        <img class="show-image" [src]="showBackground"/>
+    </div>
+    <div class="show-details-content">
+        <div class="show-details-header">
+            <h1>{{show.name}}</h1>
+            <div class="show-details-basic">
+                <span>{{show.premiered}} -</span>
+                <span *ngFor="let item of show.genres; let last = last">
+                    {{item}}<ng-container *ngIf="!last">,</ng-container>
+                </span>
+                <span *ngIf="show.runtime; else average"> - {{show?.runtime | time }}</span>
+                <ng-template #average>
+                    <span *ngIf="show.averageRuntime"> - {{show?.averageRuntime | time }}</span>
+                </ng-template>
+            </div>
+        </div>
+        <div class="show-details-overview">
+            <h3>Summary</h3>
+            <span class="show-details-tagline">{{show?.tagline}}</span>
+            <span [innerHTML]="sanitizedSummary"></span>
+        </div>
+        <div class="show-details-misc">
+            <div>
+                <h4>User rating</h4>
+                <span *ngIf="show?.rating.average != 0; else unavailable">{{show?.rating.average! / 10 | percent: '1.0-0' }}</span>
+            </div>
+            <div>
+                <h4>Status</h4>
+                <span>{{show?.status}}</span>
+            </div>
+            <div>
+                <h4>Language</h4>
+                <span *ngIf="show.language; else unavailable">{{show.language}}</span>
+            </div>
+            <div>
+                <h4>Type</h4>
+                <span *ngIf="show.type; else unavailable">{{show.type}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="errorThrown" class="error-wrapper">
+    <h1>{{errorContent}}</h1>
+</div>
+
+<ng-template #unavailable>
+    <span>N/A</span>
+</ng-template>

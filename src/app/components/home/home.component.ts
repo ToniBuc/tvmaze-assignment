@@ -30,14 +30,14 @@ export class HomeComponent {
       this.searchShows(this.searchInput);
     } else {
       // temp to keep list populated on fresh instance
-      this.searchShows('breaking');
+      this.searchShows('the');
     }
 
     this.subscriptions.add(this.search$.pipe(
       debounceTime(1000),
       distinctUntilChanged()
     ).subscribe(() => {
-      this.searchShows(this.searchInput);
+      this.searchShows(this.searchInput != '' ? this.searchInput : 'the');
     }));
   }
 
@@ -46,10 +46,16 @@ export class HomeComponent {
   }
 
   public searchShows(searchQuery: string): void {
-    this.tvmazeService.searchShows(searchQuery).subscribe((data) => {
-      console.log(data);
-      this.showList = data;
-    })
+    // should improve error handling
+    this.tvmazeService.searchShows(searchQuery).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.showList = data;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
   public emitSearchInput(event: Event): void {
