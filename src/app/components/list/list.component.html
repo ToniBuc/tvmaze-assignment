@@ -1,6 +1,6 @@
-<div class="list-wrapper">
+<div *ngIf="infoMessage === ''; else info" class="list-wrapper">
     <div class="list-item" *ngFor="let item of showList">
-        <div class="list-item-image-wrapper">
+        <div *ngIf="item.show.image; else placeholder" class="list-item-image-wrapper">
             <a [routerLink]="[item.show.id]">
                 <img class="list-item-image" [src]="item.show.image.medium"/>
                 <div class="list-item-title">
@@ -8,5 +8,24 @@
                 </div>
             </a>
         </div>
+        <ng-template #placeholder>
+            <a [routerLink]="[item.show.id]">
+                <div class="list-item-image-wrapper-no-image">
+                    <div class="list-item-title-no-image">
+                        <span>{{item.show.name}}</span>
+                    </div>
+                </div>
+            </a>
+        </ng-template>
     </div>
 </div>
+
+<ng-template #info>
+    <div class="list-wrapper">
+        <div class="list-info-wrapper">
+            <div class="list-info">
+                <h1 class="list-info-message">{{infoMessage}}</h1>
+            </div>
+        </div>
+    </div>
+</ng-template>

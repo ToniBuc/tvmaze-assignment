@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TvmazeService } from '../../services/tvmaze.service';
-import { NgFor, NgIf, PercentPipe } from '@angular/common';
+import { CommonModule, NgFor, NgIf, PercentPipe } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TimePipe } from '../../pipes/time.pipe';
 
@@ -11,7 +11,8 @@ import { TimePipe } from '../../pipes/time.pipe';
     NgIf,
     NgFor,
     TimePipe,
-    PercentPipe
+    PercentPipe,
+    CommonModule
   ],
   templateUrl: './show-details.component.html',
   styleUrl: './show-details.component.scss'
@@ -21,6 +22,7 @@ export class ShowDetailsComponent implements OnInit {
   
   public show: any;
   public showBackground: string = '';
+  public showCast: any[] = [];
   public sanitizedSummary: SafeHtml = '';
 
   public errorThrown: boolean = false;
@@ -34,6 +36,7 @@ export class ShowDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getShowDetails(<number>this.id);
     this.getShowBackground(<number>this.id);
+    this.getShowCast(<number>this.id);
   }
 
   private getShowDetails(id: number): void {
@@ -69,6 +72,20 @@ export class ShowDetailsComponent implements OnInit {
         } else {
           this.showBackground = this.show.image.original;
         }
+      },
+      error: (error) => {
+        console.log(error);
+        this.errorThrown = true;
+        this.errorContent = error.message;
+      }
+    })
+  }
+
+  private getShowCast(id: number): void {
+    this.tvmazeService.getShowCast(id).subscribe({
+      next: (data) => {
+        this.showCast = data;
+        console.log(data);
       },
       error: (error) => {
         console.log(error);

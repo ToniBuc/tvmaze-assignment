@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,13 +8,15 @@ import { RouterLink } from '@angular/router';
   imports: [
     NgFor, 
     NgIf,
-    RouterLink
+    RouterLink,
+    CommonModule
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
   @Input() showList: any[] = []
+  @Input() infoMessage: string = '';
 
   constructor() {}
 

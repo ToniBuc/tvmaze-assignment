@@ -18,6 +18,8 @@ export class HomeComponent {
   public searchInput: string = '';
   public showList: any[] = [];
 
+  public infoMessage: string = '';
+
   constructor(
     private tvmazeService: TvmazeService,
     private searchStateService: SearchStateService
@@ -50,9 +52,16 @@ export class HomeComponent {
     this.tvmazeService.searchShows(searchQuery).subscribe({
       next: (data) => {
         console.log(data);
-        this.showList = data;
+        if (data.length > 0) {
+          this.infoMessage = '';
+          this.showList = data;
+        } else {
+          this.infoMessage = "Sorry, we couldn't find anything. Please try a different search term!";
+        }
       },
       error: (error) => {
+        // still need to test this 
+        this.infoMessage = error.message;
         console.log(error);
       }
     });

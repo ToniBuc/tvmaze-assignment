@@ -16,7 +16,7 @@ export class TvmazeService {
       q: searchInput
     }
 
-    return this.httpClient.get(`${this.apiBaseUrl}/search/shows`, {params}).pipe(catchError(this.handleError));;
+    return this.httpClient.get(`${this.apiBaseUrl}/search/shows`, {params}).pipe(catchError(this.handleError));
   }
 
   public getShowDetails(id: number): Observable<any> {
@@ -24,7 +24,11 @@ export class TvmazeService {
   }
 
   public getShowImages(id: number): Observable<any> {
-    return this.httpClient.get(`${this.apiBaseUrl}/shows/${id}/images`).pipe(catchError(this.handleError));;
+    return this.httpClient.get(`${this.apiBaseUrl}/shows/${id}/images`).pipe(catchError(this.handleError));
+  }
+
+  public getShowCast(id: number): Observable<any> {
+    return this.httpClient.get(`${this.apiBaseUrl}/shows/${id}/cast`).pipe(catchError(this.handleError));
   }
 
   // should improve error handling
