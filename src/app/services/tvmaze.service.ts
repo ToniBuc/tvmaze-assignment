@@ -39,6 +39,6 @@ export class TvmazeService {
       console.error(
         `TVMaze API returned code ${error.status}, body was: `, error.error);
     }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(() => new Error(`Something went wrong! ${error.statusText} ${error.status}. Please try again later.`));
   }
 }

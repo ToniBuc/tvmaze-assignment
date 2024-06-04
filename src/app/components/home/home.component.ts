@@ -3,6 +3,7 @@ import { ListComponent } from '../list/list.component';
 import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { TvmazeService } from '../../services/tvmaze.service';
 import { SearchStateService } from '../../services/search-state.service';
+import { Show } from '../../types/show';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent {
   private search$ = new Subject<string>();
 
   public searchInput: string = '';
-  public showList: any[] = [];
+  public showList: Show[] = [];
 
   public infoMessage: string = '';
 

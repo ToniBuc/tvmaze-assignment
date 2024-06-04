@@ -3,6 +3,7 @@ import { TvmazeService } from '../../services/tvmaze.service';
 import { CommonModule, NgFor, NgIf, PercentPipe } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TimePipe } from '../../pipes/time.pipe';
+import { CastMember, ShowDetails } from '../../types/show';
 
 @Component({
   selector: 'app-show-details',
@@ -20,9 +21,9 @@ import { TimePipe } from '../../pipes/time.pipe';
 export class ShowDetailsComponent implements OnInit {
   @Input() id: number | undefined;
   
-  public show: any;
+  public show: ShowDetails | undefined;
   public showBackground: string = '';
-  public showCast: any[] = [];
+  public showCast: CastMember[] = [];
   public sanitizedSummary: SafeHtml = '';
 
   public errorThrown: boolean = false;
@@ -69,8 +70,6 @@ export class ShowDetailsComponent implements OnInit {
           });
 
           this.showBackground = highestRes.resolutions.original.url;
-        } else {
-          this.showBackground = this.show.image.original;
         }
       },
       error: (error) => {

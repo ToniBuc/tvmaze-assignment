@@ -1,47 +1,63 @@
 <div *ngIf="show && !errorThrown" class="show-details-wrapper">
-    <div [ngStyle]="{'background-image': 'url(' + showBackground + ')'}" class="show-trailer-image-wrapper"></div>
-    <div class="show-details-content">
-        <div class="show-details-header">
-            <h1>{{show.name}}</h1>
-            <div class="show-details-basic">
-                <span>{{show.premiered}} -</span>
-                <span *ngFor="let item of show.genres; let last = last">
-                    {{item}}<ng-container *ngIf="!last">,</ng-container>
-                </span>
-                <span *ngIf="show.runtime; else average"> - {{show?.runtime | time }}</span>
-                <ng-template #average>
-                    <span *ngIf="show.averageRuntime"> - {{show?.averageRuntime | time }}</span>
-                </ng-template>
+    <div class="show-main-details-wrapper">
+        <div *ngIf="showBackground; else placeholder" [ngStyle]="{'background-image': 'url(' + showBackground + ')'}" class="show-trailer-image-wrapper"></div>
+        <ng-template #placeholder>
+            <div class="show-trailer-image-wrapper-no-image"></div>
+        </ng-template>
+        <div class="show-details-content">
+            <div class="show-details-header">
+                <h1>{{show.name}}</h1>
+                <div class="show-details-basic">
+                    <span>{{show.premiered}} -</span>
+                    <span *ngFor="let item of show.genres; let last = last">
+                        {{item}}<ng-container *ngIf="!last">,</ng-container>
+                    </span>
+                    <span *ngIf="show.runtime; else average"> - {{show.runtime | time }}</span>
+                    <ng-template #average>
+                        <span *ngIf="show.averageRuntime"> - {{show.averageRuntime | time }}</span>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="show-details-overview">
+                <h3>Summary</h3>
+                <span [innerHTML]="sanitizedSummary"></span>
+            </div>
+            <div class="show-details-misc">
+                <div *ngIf="show.network">
+                    <h4>Network</h4>
+                    <span>{{show.network.name}}</span>
+                </div>
+                <div *ngIf="show.webChannel">
+                    <h4>Web Channel</h4>
+                    <span>{{show.webChannel.name}}</span>
+                </div>
+                <div>
+                    <h4>Rating</h4>
+                    <span *ngIf="show.rating.average != 0; else unavailable">{{show.rating.average! / 10 | percent: '1.0-0' }}</span>
+                </div>
+                <div>
+                    <h4>Status</h4>
+                    <span>{{show.status}}</span>
+                </div>
+                <div>
+                    <h4>Language</h4>
+                    <span *ngIf="show.language; else unavailable">{{show.language}}</span>
+                </div>
+                <div>
+                    <h4>Type</h4>
+                    <span *ngIf="show.type; else unavailable">{{show.type}}</span>
+                </div>
             </div>
         </div>
-        <div class="show-details-overview">
-            <h3>Summary</h3>
-            <span [innerHTML]="sanitizedSummary"></span>
-        </div>
-        <div class="show-details-misc">
-            <div *ngIf="show.network">
-                <h4>Network</h4>
-                <span>{{show.network.name}}</span>
+    </div>
+    <div class="show-cast-list-wrapper">
+        <div *ngFor="let item of showCast | slice:0:16" class="show-cast-list">
+            <img class="show-cast-image" [src]="item.person.image.medium"/>
+            <div class="show-cast-person">
+                <span>{{item.person.name}}</span>
             </div>
-            <div *ngIf="show.webChannel">
-                <h4>Web Channel</h4>
-                <span>{{show.webChannel.name}}</span>
-            </div>
-            <div>
-                <h4>User rating</h4>
-                <span *ngIf="show.rating.average != 0; else unavailable">{{show.rating.average! / 10 | percent: '1.0-0' }}</span>
-            </div>
-            <div>
-                <h4>Status</h4>
-                <span>{{show.status}}</span>
-            </div>
-            <div>
-                <h4>Language</h4>
-                <span *ngIf="show.language; else unavailable">{{show.language}}</span>
-            </div>
-            <div>
-                <h4>Type</h4>
-                <span *ngIf="show.type; else unavailable">{{show.type}}</span>
+            <div class="show-cast-character">
+                <span>{{'as ' + item.character.name}}</span>
             </div>
         </div>
     </div>

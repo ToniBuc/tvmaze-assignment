@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Show } from '../../types/show';
 
 @Component({
   selector: 'app-list',
@@ -15,7 +16,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
-  @Input() showList: any[] = []
+  @Input() showList: Show[] = []
   @Input() infoMessage: string = '';
 
   constructor() {}
