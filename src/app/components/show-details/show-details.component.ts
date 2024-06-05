@@ -41,11 +41,8 @@ export class ShowDetailsComponent implements OnInit {
   }
 
   private getShowDetails(id: number): void {
-    // this.tvmazeService.getShowDetails(129382190839218391283).subscribe({
     this.tvmazeService.getShowDetails(id).subscribe({
       next: (data) => {
-        console.log(data);
-        
         this.show = data;
         this.sanitizedSummary = this.sanitizer.bypassSecurityTrustHtml(data.summary);
       },
@@ -84,7 +81,6 @@ export class ShowDetailsComponent implements OnInit {
     this.tvmazeService.getShowCast(id).subscribe({
       next: (data) => {
         this.showCast = data;
-        console.log(data);
       },
       error: (error) => {
         console.log(error);

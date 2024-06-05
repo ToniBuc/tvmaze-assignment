@@ -3,16 +3,18 @@
         <div *ngIf="item.show.image; else placeholder" class="list-item-image-wrapper">
             <a [routerLink]="[item.show.id]">
                 <img class="list-item-image" [src]="item.show.image.medium"/>
-                <div class="list-item-title">
-                    <span>{{item.show.name}}</span>
+                <div class="list-item-info">
+                    <span class="list-item-name">{{item.show.name}}</span>
+                    <span class="list-item-premiere">{{item.show.premiered}}</span>
                 </div>
             </a>
         </div>
         <ng-template #placeholder>
             <a [routerLink]="[item.show.id]">
                 <div class="list-item-image-wrapper-no-image">
-                    <div class="list-item-title-no-image">
-                        <span>{{item.show.name}}</span>
+                    <div class="list-item-info-no-image">
+                        <span class="list-item-name">{{item.show.name}}</span>
+                        <span class="list-item-premiere">{{item.show.premiered}}</span>
                     </div>
                 </div>
             </a>

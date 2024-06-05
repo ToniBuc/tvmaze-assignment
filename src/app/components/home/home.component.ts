@@ -32,10 +32,11 @@ export class HomeComponent {
     if (this.searchInput) {
       this.searchShows(this.searchInput);
     } else {
-      // temp to keep list populated on fresh instance
+      // to keep list populated on fresh instance
       this.searchShows('the');
     }
 
+    // added 1s debounce to avoid instant update of list when user enters search term 
     this.subscriptions.add(this.search$.pipe(
       debounceTime(1000),
       distinctUntilChanged()
@@ -49,10 +50,8 @@ export class HomeComponent {
   }
 
   public searchShows(searchQuery: string): void {
-    // should improve error handling
     this.tvmazeService.searchShows(searchQuery).subscribe({
       next: (data) => {
-        console.log(data);
         if (data.length > 0) {
           this.infoMessage = '';
           this.showList = data;
@@ -61,7 +60,6 @@ export class HomeComponent {
         }
       },
       error: (error) => {
-        // still need to test this 
         this.infoMessage = error.message;
         console.log(error);
       }

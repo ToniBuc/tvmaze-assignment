@@ -1,4 +1,7 @@
 <div class="home-wrapper">
-    <input class="show-filter-input" placeholder="search" (keyup)="emitSearchInput($event)" #search [value]="searchInput"/>
+    <div class="home-input-wrapper">
+        <h1 class="home-welcome-message">Welcome!</h1>
+        <input class="show-filter-input" placeholder="Search for a show" (keyup)="emitSearchInput($event)" #search [value]="searchInput"/>
+    </div>
     <app-list [showList]="showList" [infoMessage]="infoMessage"></app-list>
 </div>

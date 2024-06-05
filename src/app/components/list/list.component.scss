@@ -35,7 +35,7 @@
                     blur(2px);
         }
 
-        .list-item-title {
+        .list-item-info {
             opacity: 1;
         }
     }
@@ -44,7 +44,7 @@
         transform: scale(1.05);
     }
 
-    .list-item-title {
+    .list-item-info {
         position: absolute;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -56,6 +56,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+
+        .list-item-name {
+            font-weight: bold;
+        }
+
+        .list-item-premiere {
+            font-style: italic;
+            font-size: 14px;
+            color:lightgray
+        }
 
         span {
             text-align: center;
@@ -79,7 +90,7 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
-    .list-item-title-no-image {
+    .list-item-info-no-image {
         text-decoration: none;
         color: white;
         text-align: center;
