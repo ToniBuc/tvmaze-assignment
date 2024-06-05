@@ -8,7 +8,7 @@
             <div class="show-details-header">
                 <h1>{{show.name}}</h1>
                 <div class="show-details-basic">
-                    <span>{{show.premiered}} -</span>
+                    <span *ngIf="show.premiered">{{show.premiered}} -</span>
                     <span *ngFor="let item of show.genres; let last = last">
                         {{item}}<ng-container *ngIf="!last">,</ng-container>
                     </span>
@@ -33,11 +33,11 @@
                 </div>
                 <div>
                     <h4>Rating</h4>
-                    <span *ngIf="show.rating.average != 0; else unavailable">{{show.rating.average! / 10 | percent: '1.0-0' }}</span>
+                    <span *ngIf="show.rating.average && show.rating.average != 0; else unavailable">{{show.rating.average! / 10 | percent: '1.0-0' }}</span>
                 </div>
                 <div>
                     <h4>Status</h4>
-                    <span>{{show.status}}</span>
+                    <span *ngIf="show.status; else unavailable">{{show.status}}</span>
                 </div>
                 <div>
                     <h4>Language</h4>
