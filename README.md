@@ -1,27 +1,21 @@
-# TvmazeAssignment
+# TV Maze Assignment
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
 
-## Development server
+## Getting started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+There are two custom scripts made available to get the app up and running, pick one to run depending on your situation/preference:
 
-## Code scaffolding
+Run `npm run assignment` to install dependencies, build the app and serve it.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `npm run assignment:ng` to globally install Angular CLI version 18.0.2, then install dependencies, build the app and serve it.
 
-## Build
+## Use
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+When using the app you will be greeted by the show list with some preloaded shows.
 
-## Running unit tests
+The search bar will allow you to filter the show list based on the name of the shows. The app retains the search state, so when navigating between pages, your search term will remain for your convenience.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The show list itself is made up of cards that display show images. When hovering over the cards, the name and premiere date of the specific show will be displayed.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Upon clicking on a card, you will be taken to the details page of your chosen show.
